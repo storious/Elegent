@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import Home from '../components/HelloWorld.vue';
 import Problems from "../views/ProblemSetView.vue"
+import ACCESS_ENUM from "../access/accessEnum";
 
 export const routes: Array<RouteRecordRaw> = [
     {
@@ -14,7 +15,15 @@ export const routes: Array<RouteRecordRaw> = [
         name: "题库",
         component: Problems,
         meta: {
-            access: "loginUser"
+            access: ACCESS_ENUM.NOT_LOGIN
+        }
+    },
+    {
+        path: "/admin",
+        name: "管理员菜单",
+        component: () => import("../views/AdminView.vue"),
+        meta: {
+            access: ACCESS_ENUM.ADMIN
         }
     },
 
@@ -23,6 +32,10 @@ export const routes: Array<RouteRecordRaw> = [
         name: "无权限",
         component: () =>
             import("../views/NoAuthView.vue"),
+        meta: {
+            hideInMenu: true
+        }
+
     },
 
     {

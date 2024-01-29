@@ -1,16 +1,33 @@
 <script setup lang="ts">
 import { routes } from "../router/routes";
 import { useRouter } from "vue-router";
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useStore } from "vuex"
+import checkAccess from "../access/checkAccess"
+import ACCESS_ENUM from "../access/accessEnum";
 
 const router = useRouter();
+const store = useStore();
 
+//需要展示的路由菜单
+const visibleRoutes = computed(() => {
+    return routes.filter((item) => {
+        if (item.meta?.hideInMenu) {
+            return false;
+        }
+        const loginUser = store.state.user.loginUser;
+        //通过权限过滤菜单
+        if (!checkAccess(loginUser , item?.meta?.access as string)) {
+            return false;
+        }
+        return true;
+    });
+});
 // 默认主页
 const selectKeys = ref(["/"]);
 //监听路由
 //跳转时, 更新选中的菜单
-router.afterEach((to, from, failure) => {
+router.afterEach((to) => {
     selectKeys.value = [to.path];
 });
 
@@ -20,20 +37,20 @@ const doMenuClick = (key: string) => {
     });
 };
 
-const store = useStore();
+
 // console.log(store.state.user);
 
 setTimeout(() => {
     store.dispatch("user/getLoginUser", {
         userName: "admin",
-        role:"login"
+        role: ACCESS_ENUM.ADMIN
     })
     // console.log(store.state.user.loginUser);
 }, 3000);
 
 </script>
 <template>
-    <a-row id="globalHeader" style="margin-bottom: 16px;" align="center">
+    <a-row id="globalHeader" style="margin-bottom: 16px;" align="center" :warp="false">
         <a-col flex="auto">
             <a-menu mode="horizontal" :selected-keys:="selectKeys" @menu-item-click="doMenuClick">
                 <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
@@ -42,7 +59,7 @@ setTimeout(() => {
                         <div class="title">New Coder</div>
                     </div>
                 </a-menu-item>
-                <a-menu-item v-for="item in routes" :key="item.path">
+                <a-menu-item v-for="item in visibleRoutes" :key="item.path">
                     {{ item.name }}
                 </a-menu-item>
             </a-menu>

@@ -5,7 +5,7 @@ import GlobalHeader from '../components/GlobalHeader.vue';
 
 <template>
     <div id="basicLayout">
-        <a-layout style="height: 400px;">
+        <a-layout style="min-height: 100vh;">
             <a-layout-header class="header">
                 <GlobalHeader></GlobalHeader>
             </a-layout-header>
@@ -21,19 +21,19 @@ import GlobalHeader from '../components/GlobalHeader.vue';
 #basicLayout {}
 
 #basicLayout .header {
-    margin-bottom: 16px;
     box-shadow: #eee 1px 1px 5px;
 }
 
 #basicLayout .content {
-    background: liner-gradient(to, right, #aaaa, #fff);
+    background: liner-gradient(to, right, #bbbb, #fff);
     margin-bottom: 16px;
+    padding: 20px;
 }
 
 #basicLayout .footer {
     background: #efefef;
     padding: 16px;
-    position: absolute;
+    position: sticky;
     bottom: 0px;
     left: 0;
     right: 0;

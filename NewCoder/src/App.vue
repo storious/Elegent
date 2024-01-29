@@ -2,18 +2,21 @@
 import { useRouter } from "vue-router";
 import BasicLayout from "../src/layout/BasicLayout.vue";
 import store from "./store";
+import checkAccess from "./access/checkAccess";
 
 const router = useRouter();
 
+// 全局初始化函数
+const doInit = () => {
+  console.log("Welcome to New Coder!!!");
+};
+
 router.beforeEach((to, from, next) => {
-  if (to.meta?.access === "loginUser") {
-    // console.log(store.state.user.loginUser);
-    if (store.state.user.loginUser?.role === "notLogin") {
-      next("../noAuth");
-      return
-    }
+  if (!checkAccess(store.state.user.loginUser, to.meta?.access as string)) {
+    next("../noAuth");
+    return
   }
-  // console.log(to);
+
   next()
 });
 
