@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { ref, computed } from "vue"
 import { useStore } from "vuex"
 import checkAccess from "../access/checkAccess"
-import ACCESS_ENUM from "../access/accessEnum";
+import { IconUser } from '@arco-design/web-vue/es/icon';
 
 const router = useRouter();
 const store = useStore();
@@ -17,7 +17,7 @@ const visibleRoutes = computed(() => {
         }
         const loginUser = store.state.user.loginUser;
         //通过权限过滤菜单
-        if (!checkAccess(loginUser , item?.meta?.access as string)) {
+        if (!checkAccess(loginUser, item?.meta?.access as string)) {
             return false;
         }
         return true;
@@ -37,17 +37,6 @@ const doMenuClick = (key: string) => {
     });
 };
 
-
-// console.log(store.state.user);
-
-setTimeout(() => {
-    store.dispatch("user/getLoginUser", {
-        userName: "admin",
-        role: ACCESS_ENUM.ADMIN
-    })
-    // console.log(store.state.user.loginUser);
-}, 3000);
-
 </script>
 <template>
     <a-row id="globalHeader" style="margin-bottom: 16px;" align="center" :warp="false">
@@ -64,7 +53,11 @@ setTimeout(() => {
                 </a-menu-item>
             </a-menu>
         </a-col>
+        <a-col flex="50px"><a-avatar :style="{ backgroundColor: '#3370ff' }">
+                <IconUser />
+            </a-avatar></a-col>
         <a-col flex="100px">
+            
             <div>{{ store.state.user?.loginUser?.userName ?? '未登录' }}</div>
         </a-col>
     </a-row>
@@ -78,7 +71,7 @@ setTimeout(() => {
 
 .title {
     color: black;
-    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans GB, noto sans, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: large;
     margin-left: 8px;
 }

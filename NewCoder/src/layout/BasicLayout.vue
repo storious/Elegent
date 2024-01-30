@@ -20,7 +20,6 @@ import GlobalHeader from '../components/GlobalHeader.vue';
 </template>
 
 <style scoped>
-#basicLayout {}
 
 #basicLayout .header {
     box-shadow: #eee 1px 1px 5px;
