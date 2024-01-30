@@ -3,6 +3,7 @@ import { useRouter } from "vue-router";
 import BasicLayout from "../src/layout/BasicLayout.vue";
 import store from "./store";
 import checkAccess from "./access/checkAccess";
+import { onMounted } from "vue";
 
 const router = useRouter();
 
@@ -10,6 +11,10 @@ const router = useRouter();
 const doInit = () => {
   console.log("Welcome to New Coder!!!");
 };
+
+onMounted(() => {
+  doInit();
+})
 
 router.beforeEach((to, from, next) => {
   if (!checkAccess(store.state.user.loginUser, to.meta?.access as string)) {
@@ -29,3 +34,4 @@ router.beforeEach((to, from, next) => {
 </template>
 
 <style scoped></style>
+<!-- openapi --input http://localhost:8101//v2/api-docs --output ./generated --client axios -->

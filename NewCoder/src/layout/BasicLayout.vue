@@ -12,7 +12,9 @@ import GlobalHeader from '../components/GlobalHeader.vue';
             <a-layout-content class="content">
                 <RouterView></RouterView>
             </a-layout-content>
-            <a-layout-footer class="footer"></a-layout-footer>
+            <a-layout-footer class="footer">
+                Powered by storious version: 1.0
+            </a-layout-footer>
         </a-layout>
     </div>
 </template>
