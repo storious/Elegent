@@ -18,7 +18,7 @@ export default {
                 commit("updateUser", res.data);
             }
             else {
-                commit("updateUser", { ...state.loginUser, role: ACCESS_ENUM.NOT_LOGIN });
+                commit("updateUser", { ...state.loginUser, userRole: ACCESS_ENUM.NOT_LOGIN });
             }
         },
     },

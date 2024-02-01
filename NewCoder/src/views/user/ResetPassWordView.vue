@@ -10,13 +10,32 @@ const form = reactive({
 });
 
 const visible = ref(false);
+const status = ref(false);
+const button_info = ref("获取验证码");
 let verCode = "";
 const router = useRouter();
+
 
 
 const getVerification = () => {
     Message.info("验证码已经发送, 请注意查收")
     verCode = "123456"
+    status.value = true;
+    let i = 10
+
+   const count = setInterval(() => {
+        i--;
+        if (i > 0) {
+            button_info.value = i.toString() + "秒后可重新发送"
+            i--;
+        }
+        else{
+            button_info.value = "获取验证码";
+            status.value = false;
+            clearInterval(count)
+        }
+    }, 1000)
+    
 }
 
 const onFinish = (value: string) => {
@@ -61,8 +80,8 @@ const reset = () => {
                     <a-verification-code masked @finish="onFinish" />
                 </a-form-item>
                 <a-form-item>
-                    <a-button @click="getVerification" long size="large" type="primary" shape="round"
-                        html-type="submit">获取验证码</a-button>
+                    <a-button type="primary" size="large" shape="round" long :loading="status" 
+                        html-type="submit" @click="getVerification">{{ button_info }}</a-button>
                 </a-form-item>
             </template>
         </a-form>

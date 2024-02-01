@@ -6,7 +6,7 @@ import ACCESS_ENUM from "./accessEnum"
 
 const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
     //获取当前用户权限
-    const loginUserAccess = loginUser?.role ?? ACCESS_ENUM.NOT_LOGIN;
+    const loginUserAccess = loginUser?.userRole ?? ACCESS_ENUM.NOT_LOGIN;
     if (needAccess === ACCESS_ENUM.NOT_LOGIN) {
         return true;
     }

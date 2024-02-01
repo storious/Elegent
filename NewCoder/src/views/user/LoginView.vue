@@ -59,8 +59,8 @@ const goRegister = () => {
                     html-type="submit">登录</a-button>
             </a-form-item>
             <a-form-item>
-                <a-link @click="goRest" style="margin-left: 0px;">忘记密码</a-link>
-                <a-link @click="goRegister" style="margin-left: 160px;">新用户注册</a-link>
+                <a-link @click="goRest">忘记密码?</a-link>
+                <a-link @click="goRegister" style="margin-left: auto;">新用户注册</a-link>
             </a-form-item>
         </a-form>
     </div>

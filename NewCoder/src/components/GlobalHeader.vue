@@ -5,6 +5,7 @@ import { ref, computed } from "vue"
 import { useStore } from "vuex"
 import checkAccess from "../access/checkAccess"
 import { IconUser } from '@arco-design/web-vue/es/icon';
+import ACCESS_ENUM from "../access/accessEnum";
 
 const router = useRouter();
 const store = useStore();
@@ -37,6 +38,22 @@ const doMenuClick = (key: string) => {
     });
 };
 
+const toLoginOrProfile = () => {
+    const loginUser = store.state.user.loginUser;
+    console.log(loginUser);
+    
+    if (!loginUser.userRole || loginUser.userRole === ACCESS_ENUM.NOT_LOGIN) {
+        router.push({
+            path: "/user/login"
+        })
+    }
+    else {
+        router.push({
+            path: "/profile"
+        })
+    }
+}
+
 </script>
 <template>
     <a-row id="globalHeader" style="margin-bottom: 16px;" align="center" :warp="false">
@@ -57,11 +74,12 @@ const doMenuClick = (key: string) => {
                 <IconUser />
             </a-avatar></a-col>
         <a-col flex="100px">
-            
-            <div>{{ store.state.user?.loginUser?.userName ?? '未登录' }}</div>
+
+            <a-link @click="toLoginOrProfile">{{ store.state.user?.loginUser?.userName ?? '未登录' }}</a-link>
         </a-col>
     </a-row>
 </template>
+
 
 <style scoped>
 .title-bar {

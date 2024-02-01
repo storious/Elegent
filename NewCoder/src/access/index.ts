@@ -8,7 +8,7 @@ router.beforeEach(async (to, _from, next) => {
     // console.log(store.state.user.loginUser);
     const loginUser = store.state.user.loginUser;
     //如果未登录过
-    if (!loginUser.role) {
+    if (!loginUser.userRole) {
         await store.dispatch("user/getLoginUser");
     }
 
@@ -17,7 +17,7 @@ router.beforeEach(async (to, _from, next) => {
     if(needAccess !== ACCESS_ENUM.NOT_LOGIN)
     {
         //如果没登陆
-        if(!loginUser.role)
+        if(!loginUser.userRole)
         {
             next('/user/login?redirect=${to.fullPath}');
             return;

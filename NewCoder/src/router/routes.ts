@@ -11,29 +11,40 @@ export const routes: Array<RouteRecordRaw> = [
     },
 
     {
+        path: "/profile",
+        name: "个人中心",
+        component: () =>
+            import("../views/profile/ProfileView.vue"),
+        meta: {
+            hideInMenu: true,
+        }
+
+    },
+
+    {
         path: "/user",
         name: "用户",
-        component: ()=>import("../layout/UserLayout.vue"),
+        component: () => import("../layout/UserLayout.vue"),
         children: [
             {
                 path: "/user/login",
                 name: "用户登录",
-                component:()=> import("../views/user/LoginView.vue"),
+                component: () => import("../views/user/LoginView.vue"),
             },
             {
                 path: "/user/register",
                 name: "用户注册",
-                component:()=> import("../views/user/RegisterView.vue"),
+                component: () => import("../views/user/RegisterView.vue"),
             },
             {
                 path: "/user/reset",
                 name: "找回密码",
-                component:()=> import("../views/user/ResetPassWordView.vue"),
+                component: () => import("../views/user/ResetPassWordView.vue"),
             },
         ],
         meta: {
             hideInMenu: true,
-            access:ACCESS_ENUM.NOT_LOGIN
+            access: ACCESS_ENUM.NOT_LOGIN
         }
     },
 
