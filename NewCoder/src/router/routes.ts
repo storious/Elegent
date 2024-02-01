@@ -25,9 +25,15 @@ export const routes: Array<RouteRecordRaw> = [
                 name: "用户注册",
                 component:()=> import("../views/user/RegisterView.vue"),
             },
+            {
+                path: "/user/reset",
+                name: "找回密码",
+                component:()=> import("../views/user/ResetPassWordView.vue"),
+            },
         ],
         meta: {
-            hideInMenu: true
+            hideInMenu: true,
+            access:ACCESS_ENUM.NOT_LOGIN
         }
     },
 

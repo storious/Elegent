@@ -13,7 +13,7 @@ const form = reactive({
 const router = useRouter();
 const store = useStore();
 
-const handleSubmit = async () => {
+const handleLogin = async () => {
     const res = await UserControllerService.userLoginUsingPost(form);
     // console.log(form)
 
@@ -30,21 +30,37 @@ const handleSubmit = async () => {
     }
 }
 
+const goRest = () => {
+    router.push({
+        path: "reset"
+    })
+}
+
+const goRegister = () => {
+    router.push({
+        path: "register"
+    })
+}
+
 
 </script>
 
 <template>
     <div id="userLoginView">
-        <a-form style="max-width: 360px; margin:0 auto" label-algin="left" auto-label-width="true" :model="form"
-            @submit="handleSubmit">
-            <a-form-item field="userAccount" label="账号">
-                <a-input v-model="form.userAccount" placeholder="请输入账号" />
+        <a-form style="max-width: 320px; margin:0 auto" auto-label-width :model="form">
+            <a-form-item field="userAccount">
+                <a-input v-model="form.userAccount" placeholder="请输入邮箱" />
             </a-form-item>
-            <a-form-item field="userPassword" label="密码">
+            <a-form-item field="userPassword">
                 <a-input-password v-model="form.userPassword" placeholder="请输入密码" />
             </a-form-item>
             <a-form-item>
-                <a-button type="primary" html-type="submit">登录</a-button>
+                <a-button @click="handleLogin" long size="large" type="primary" shape="round"
+                    html-type="submit">登录</a-button>
+            </a-form-item>
+            <a-form-item>
+                <a-link @click="goRest" style="margin-left: 0px;">忘记密码</a-link>
+                <a-link @click="goRegister" style="margin-left: 160px;">新用户注册</a-link>
             </a-form-item>
         </a-form>
     </div>

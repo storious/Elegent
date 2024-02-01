@@ -1,5 +1,15 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterView } from 'vue-router';
+
+
+const visible = ref(false)
+
+const openQrcode = () => {
+    visible.value = !visible.value;
+    console.log(visible)
+}
+
 </script>
 
 <template>
@@ -9,12 +19,27 @@ import { RouterView } from 'vue-router';
             </a-layout-header>
             <a-layout-content class="content">
                 <a-card class="card" style="width: 360px; margin: 0 auto;" hoverable>
-                    <a-space>
-                        <img class="logo" src="../assets/logo.svg" />
-                        <img class="text-logo" src="../assets/text-logo.png">
-                        <!-- <div>New Coder</div> -->
-                    </a-space>
-                    <RouterView></RouterView>
+
+                    <div class="qrcode-container">
+                        <template v-if="visible">
+                            <img src="../assets/logo.jpeg" alt="账号登录" class="img" @click="openQrcode" />
+                        </template>
+                        <template v-else>
+                            <img src="../assets/qrcode.png" alt="二维码登录" class="img" @click="openQrcode" />
+                        </template>
+                    </div>
+
+                    <template v-if="!visible">
+                        <a-space>
+                            <img class="logo" src="../assets/logo.svg" />
+                        </a-space>
+                        <RouterView></RouterView>
+                    </template>
+                    <template v-else>
+                        <div style="font-size: x-large;margin-bottom: 20px;">扫码登录</div>
+                        <img src="../assets/qrcode.png" class="show_full" />
+                        <div>打开App扫一扫</div>
+                    </template>
                 </a-card>
             </a-layout-content>
             <a-layout-footer class="footer">
@@ -28,16 +53,19 @@ import { RouterView } from 'vue-router';
 #userLayout {
     text-align: center;
     background-image: url("../assets/login_background.jpg");
-    /* background: rgba(var(--dsw-layer-bg-rgb), 1); */
 }
 
 #userLayout .card {
     width: 360px;
     margin-left: 24px;
     transition-property: all;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    padding: 5px;
 }
+
 .card:hover {
-  transform: translateY(-4px);
+    transform: translateY(-4px);
 }
 
 #userLayout .header {
@@ -45,14 +73,10 @@ import { RouterView } from 'vue-router';
 }
 
 #userLayout .logo {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
 }
 
-#userLayout .text-logo {
-    width: 120px;
-    height: auto;
-}
 
 #userLayout .content {
     background: liner-gradient(to, right, #bbbb, #fff);
@@ -68,5 +92,43 @@ import { RouterView } from 'vue-router';
     left: 0;
     right: 0;
     text-align: center;
+}
+
+.card {
+    position: relative;
+
+    overflow: hidden;
+    /* 其他卡片样式 */
+}
+
+.show_full{
+    width: 300px;
+    height: 300px;
+}
+
+.qrcode-container {
+    position: absolute;
+    top: -50px;
+    /* 从顶部的距离 */
+    right: -50px;
+    /* 从右侧的距离 */
+    width: 80px;
+    /* 二维码容器的宽度 */
+    height: 80px;
+    /* 二维码容器的高度 */
+    background-color: #fff;
+    /* 二维码容器的背景颜色 */
+    border-radius: 50%;
+    /* 二维码容器的圆角 */
+    padding: 5px;
+    /* 二维码容器的内边距 */
+}
+
+.qrcode-container .img {
+    cursor: pointer;
+    width: 100%;
+    /* 二维码图像的宽度 */
+    height: 100%;
+    /* 二维码图像的高度 */
 }
 </style>

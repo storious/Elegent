@@ -5,7 +5,6 @@ const store = createStore({
   modules: {
     user,
   },
-  action: {},
   mutations: {}
 })
 export default store

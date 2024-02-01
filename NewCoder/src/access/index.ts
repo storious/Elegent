@@ -4,7 +4,7 @@ import store from "../store";
 import ACCESS_ENUM from "./accessEnum";
 
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
     // console.log(store.state.user.loginUser);
     const loginUser = store.state.user.loginUser;
     //如果未登录过
