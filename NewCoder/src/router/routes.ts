@@ -17,6 +17,7 @@ export const routes: Array<RouteRecordRaw> = [
             import("../views/profile/ProfileView.vue"),
         meta: {
             hideInMenu: true,
+            access: ACCESS_ENUM.USER
         }
 
     },

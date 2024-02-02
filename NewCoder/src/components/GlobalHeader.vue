@@ -41,7 +41,7 @@ const doMenuClick = (key: string) => {
 const toLoginOrProfile = () => {
     const loginUser = store.state.user.loginUser;
     console.log(loginUser);
-    
+
     if (!loginUser.userRole || loginUser.userRole === ACCESS_ENUM.NOT_LOGIN) {
         router.push({
             path: "/user/login"
@@ -51,6 +51,26 @@ const toLoginOrProfile = () => {
         router.push({
             path: "/profile"
         })
+    }
+}
+
+const handleSelect = async (option: any) => {
+    if (option.value === "login") {
+        if (store.state.user.loginUser.userRole === ACCESS_ENUM.NOT_LOGIN) {
+            router.push(
+                {
+                    path: "/user/login"
+                }
+            )
+        }
+    } else if (option.value === "logout") {
+        if (store.state.user.loginUser.userRole !== ACCESS_ENUM.NOT_LOGIN) {
+            await store.dispatch("user/userLogout")
+            router.push({
+                path: "/",
+                replace: true
+            })
+        }
     }
 }
 
@@ -70,9 +90,18 @@ const toLoginOrProfile = () => {
                 </a-menu-item>
             </a-menu>
         </a-col>
-        <a-col flex="50px"><a-avatar :style="{ backgroundColor: '#3370ff' }">
-                <IconUser />
-            </a-avatar></a-col>
+        <a-col flex="50px">
+            <a-dropdown @select="handleSelect">
+                <a-avatar :style="{ backgroundColor: '#3370ff' }">
+                    <IconUser />
+                </a-avatar>
+                <template #content>
+                    <a-doption :value="{ value: 'login' }" popup-visible>登录/注册</a-doption>
+                    <a-doption :value="{ value: 'logout' }" popup-visible>登出</a-doption>
+                </template>
+            </a-dropdown>
+
+        </a-col>
         <a-col flex="100px">
 
             <a-link @click="toLoginOrProfile">{{ store.state.user?.loginUser?.userName ?? '未登录' }}</a-link>

@@ -49,7 +49,7 @@ const goRegister = () => {
     <div id="userLoginView">
         <a-form style="max-width: 320px; margin:0 auto" auto-label-width :model="form">
             <a-form-item field="userAccount">
-                <a-input v-model="form.userAccount" placeholder="请输入邮箱" />
+                <a-input v-model="form.userAccount" placeholder="请输入账号" />
             </a-form-item>
             <a-form-item field="userPassword">
                 <a-input-password v-model="form.userPassword" placeholder="请输入密码" />

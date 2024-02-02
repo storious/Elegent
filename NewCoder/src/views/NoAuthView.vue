@@ -3,7 +3,13 @@
 
 <template>
     <div>
-        你无权访问此页面
+        <a-result status="403" subtitle="服务器拒绝访问">
+            <template #extra>
+                <a-space>
+                    <a-button type="primary">Back</a-button>
+                </a-space>
+            </template>
+        </a-result>
     </div>
 </template>
 
