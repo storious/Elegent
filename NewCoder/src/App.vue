@@ -18,6 +18,9 @@ onMounted(() => {
     <template v-if="$route.path.startsWith('/user')">
       <RouterView></RouterView>
     </template>
+    <template v-else-if="$route.path.startsWith('/profile')">
+      <RouterView></RouterView>
+    </template>
     <template v-else>
       <BasicLayout></BasicLayout>
     </template>

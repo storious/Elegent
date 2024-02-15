@@ -19,7 +19,6 @@ const openQrcode = () => {
             </a-layout-header>
             <a-layout-content class="content">
                 <a-card class="card" style="width: 360px; margin: 0 auto;" hoverable>
-
                     <div class="qrcode-container">
                         <template v-if="visible">
                             <img src="../assets/logo.jpeg" alt="账号登录" class="img" @click="openQrcode" />

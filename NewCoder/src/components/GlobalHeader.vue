@@ -40,7 +40,7 @@ const doMenuClick = (key: string) => {
 
 const toLoginOrProfile = () => {
     const loginUser = store.state.user.loginUser;
-    console.log(loginUser);
+    // console.log(loginUser);
 
     if (!loginUser.userRole || loginUser.userRole === ACCESS_ENUM.NOT_LOGIN) {
         router.push({
@@ -49,12 +49,13 @@ const toLoginOrProfile = () => {
     }
     else {
         router.push({
-            path: "/profile"
+            path: "/profile/info"
         })
     }
 }
 
 const handleSelect = async (option: any) => {
+
     if (option.value === "login") {
         if (store.state.user.loginUser.userRole === ACCESS_ENUM.NOT_LOGIN) {
             router.push(
@@ -72,6 +73,7 @@ const handleSelect = async (option: any) => {
             })
         }
     }
+
 }
 
 </script>
@@ -92,7 +94,7 @@ const handleSelect = async (option: any) => {
         </a-col>
         <a-col flex="50px">
             <a-dropdown @select="handleSelect">
-                <a-avatar :style="{ backgroundColor: '#3370ff' }">
+                <a-avatar>
                     <IconUser />
                 </a-avatar>
                 <template #content>

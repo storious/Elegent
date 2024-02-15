@@ -14,7 +14,14 @@ export const routes: Array<RouteRecordRaw> = [
         path: "/profile",
         name: "个人中心",
         component: () =>
-            import("../views/profile/ProfileView.vue"),
+            import("../layout/ProfileLayout.vue"),
+        children: [
+            {
+                path: "/profile/info",
+                name: "用户信息",
+                component: () => import("../views/profile/ProfileView.vue"),
+            },
+        ],
         meta: {
             hideInMenu: true,
             access: ACCESS_ENUM.USER
