@@ -4,8 +4,14 @@ import { useRouter } from "vue-router";
 import { ref, computed } from "vue"
 import { useStore } from "vuex"
 import checkAccess from "../access/checkAccess"
-import { IconUser } from '@arco-design/web-vue/es/icon';
+import { 
+    IconUser,
+    IconImport,
+    IconExport
+} from '@arco-design/web-vue/es/icon';
 import ACCESS_ENUM from "../access/accessEnum";
+
+
 
 const router = useRouter();
 const store = useStore();
@@ -98,14 +104,13 @@ const handleSelect = async (option: any) => {
                     <IconUser />
                 </a-avatar>
                 <template #content>
-                    <a-doption :value="{ value: 'login' }" popup-visible>登录/注册</a-doption>
-                    <a-doption :value="{ value: 'logout' }" popup-visible>登出</a-doption>
+                    <a-doption :value="{ value: 'login' }" popup-visible><icon-import /> 登录 / 注册</a-doption>
+                    <a-doption :value="{ value: 'logout' }" popup-visible><icon-export /> 登出</a-doption>
                 </template>
             </a-dropdown>
 
         </a-col>
         <a-col flex="100px">
-
             <a-link @click="toLoginOrProfile">{{ store.state.user?.loginUser?.userName ?? '未登录' }}</a-link>
         </a-col>
     </a-row>

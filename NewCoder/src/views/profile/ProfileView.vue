@@ -10,6 +10,7 @@ import {
     IconCode,
     IconBarChart
 } from '@arco-design/web-vue/es/icon';
+import router from '../../router';
 
 const barPercent = [
     { label: 'Progress 1', percent: 0.25, level: "简单", ac: 21, all: 133 },
@@ -24,6 +25,12 @@ for (let item in barPercent) {
 }
 
 const circlePercent: any = (sum_ac / sum_all).toFixed(4);
+
+const toHome = ()=>{
+    router.push({
+        path: "/"
+    })
+}
 
 </script>
 
@@ -64,9 +71,9 @@ const circlePercent: any = (sum_ac / sum_all).toFixed(4);
                 </template>
             </a-card-meta>
 
-            <a-button type="outline" shape="round" long>编辑资料</a-button>
+            <a-button type="outline" shape="round" long click="">编辑资料</a-button>
             <a-space></a-space>
-            <a-button type="primary" shape="round" long>返回首页</a-button>
+            <a-button type="primary" shape="round" long @click="toHome">返回首页</a-button>
 
         </a-card>
         <a-grid :cols="4" :colGap="12" :rowGap="16">
