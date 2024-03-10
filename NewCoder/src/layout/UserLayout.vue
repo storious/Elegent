@@ -72,6 +72,13 @@ const openQrcode = () => {
     border: 1px solid #ccc;
     padding: 5px;
     box-shadow: #efefef;
+    user-select: none; /* 禁用用户选择 */
+  -webkit-user-select: none; /* 兼容Webkit浏览器，如Chrome和Safari */
+  -moz-user-select: none; /* 兼容Firefox浏览器 */
+  -ms-user-select: none; /* 兼容IE浏览器 */
+  
+  /* 防止在移动设备上双击缩放 */
+  touch-action: manipulation;
 }
 
 .card:hover {
