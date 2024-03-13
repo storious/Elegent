@@ -28,7 +28,7 @@ const circlePercent: any = (sum_ac / sum_all).toFixed(4);
 
 const toHome = ()=>{
     router.push({
-        path: "/"
+        path: "/home"
     })
 }
 

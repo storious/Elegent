@@ -19,7 +19,7 @@ const handleLogin = async () => {
 
     if (res.code === 0) {
         router.push({
-            path: "/",
+            path: "/home",
             replace: true,
         });
         store.dispatch("user/getLoginUser");

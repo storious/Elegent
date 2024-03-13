@@ -1,29 +1,36 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import BasicLayout from "../src/layout/BasicLayout.vue";
-import { onMounted } from "vue";
+import { onMounted, ref, watch } from "vue";
+
+
+const route = useRoute()
 
 // 全局初始化函数
 const doInit = () => {
   console.log("Welcome to New Coder!!!");
 };
 
+const currentPath = ref("");
 onMounted(() => {
   doInit();
-})
+  currentPath.value = route.path; // 初始化当前路径
+
+  // 监听路由变化
+  watch(
+    () => route.path,
+    (newPath) => {
+      currentPath.value = newPath;
+    }
+  );
+});
 
 </script>
 
+
 <template>
   <div id="app">
-    <template v-if="$route.path.startsWith('/user')">
-      <RouterView></RouterView>
-    </template>
-    <template v-else-if="$route.path.startsWith('/profile')">
-      <RouterView></RouterView>
-    </template>
-    <template v-else>
-      <BasicLayout></BasicLayout>
-    </template>
+    <RouterView :key="currentPath"></RouterView>
   </div>
 </template>
 
