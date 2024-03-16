@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 
 
 const router = useRouter()
@@ -10,7 +10,6 @@ const doInit = () => {
   console.log("Welcome to New Coder!!!");
 };
 
-const currentPath = ref("/home");
 onMounted(() => {
   doInit();
   router.push({path: "/home"})

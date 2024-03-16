@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { routes } from "../router/routes";
 import { useRouter } from "vue-router";
-import { ref, computed } from "vue"
+import {  ref, computed } from "vue"
 import { useStore } from "vuex"
 import checkAccess from "../access/checkAccess"
 import {
@@ -17,20 +17,6 @@ const router = useRouter();
 const store = useStore();
 
 //需要展示的路由菜单
-// const visibleRoutes = computed(() => {
-//     return routes.filter((item) => {
-//         if (item.meta?.hideInMenu) {
-//             return false;
-//         }
-//         const loginUser = store.state.user.loginUser;
-//         //通过权限过滤菜单
-//         if (!checkAccess(loginUser, item?.meta?.access as string)) {
-//             return false;
-//         }
-//         return true;
-//     });
-// });
-
 
 const visibleRoutes = computed(() => {
     return routes.reduce((acc: any, item) => {
@@ -104,7 +90,7 @@ const handleSelect = async (option: any) => {
 <template>
     <a-row id="globalHeader" style="margin-bottom: 16px;" align="center" :warp="false">
         <a-col flex="auto">
-            <a-menu mode="horizontal" :selected-keys:="selectKeys" @menu-item-click="doMenuClick">
+            <a-menu mode="horizontal" :default-selected-keys="['/home']" :selected-keys:="selectKeys" @menu-item-click="doMenuClick">
                 <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
                     <div class="title-bar">
                         <img class="logo" src="../assets/logo.svg" />
@@ -133,7 +119,6 @@ const handleSelect = async (option: any) => {
         </a-col>
     </a-row>
 </template>
-
 
 <style scoped>
 .title-bar {
