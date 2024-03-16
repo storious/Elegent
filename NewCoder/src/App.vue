@@ -1,28 +1,19 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import BasicLayout from "../src/layout/BasicLayout.vue";
+import { useRouter } from "vue-router";
 import { onMounted, ref, watch } from "vue";
 
 
-const route = useRoute()
+const router = useRouter()
 
 // 全局初始化函数
 const doInit = () => {
   console.log("Welcome to New Coder!!!");
 };
 
-const currentPath = ref("");
+const currentPath = ref("/home");
 onMounted(() => {
   doInit();
-  currentPath.value = route.path; // 初始化当前路径
-
-  // 监听路由变化
-  watch(
-    () => route.path,
-    (newPath) => {
-      currentPath.value = newPath;
-    }
-  );
+  router.push({path: "/home"})
 });
 
 </script>
@@ -30,7 +21,7 @@ onMounted(() => {
 
 <template>
   <div id="app">
-    <RouterView :key="currentPath"></RouterView>
+    <RouterView></RouterView>
   </div>
 </template>
 
