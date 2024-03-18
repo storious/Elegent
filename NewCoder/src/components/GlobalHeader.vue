@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { routes } from "../router/routes";
 import { useRouter } from "vue-router";
-import { ref, computed } from "vue"
+import {  ref, computed } from "vue"
 import { useStore } from "vuex"
 import checkAccess from "../access/checkAccess"
-import { 
+import {
     IconUser,
     IconImport,
     IconExport
@@ -17,21 +17,25 @@ const router = useRouter();
 const store = useStore();
 
 //需要展示的路由菜单
+
 const visibleRoutes = computed(() => {
-    return routes.filter((item) => {
-        if (item.meta?.hideInMenu) {
-            return false;
+    return routes.reduce((acc: any, item) => {
+        if (item.children && item.children.length > 0) {
+            const filteredChildren = item.children.filter((childItem) => {
+                // 这里可以根据需要添加更多条件
+                const loginUser = store.state.user.loginUser;
+                return !(!childItem.meta?.hideInMenu && checkAccess(loginUser, childItem?.meta?.access as string));
+            });
+            if (filteredChildren.length > 0) {
+                acc = filteredChildren;
+            }
         }
-        const loginUser = store.state.user.loginUser;
-        //通过权限过滤菜单
-        if (!checkAccess(loginUser, item?.meta?.access as string)) {
-            return false;
-        }
-        return true;
-    });
+        return acc;
+    }, []);
 });
+
 // 默认主页
-const selectKeys = ref(["/"]);
+const selectKeys = ref(["/home"]);
 //监听路由
 //跳转时, 更新选中的菜单
 router.afterEach((to) => {
@@ -74,7 +78,7 @@ const handleSelect = async (option: any) => {
         if (store.state.user.loginUser.userRole !== ACCESS_ENUM.NOT_LOGIN) {
             await store.dispatch("user/userLogout")
             router.push({
-                path: "/",
+                path: "/home",
                 replace: true
             })
         }
@@ -86,7 +90,7 @@ const handleSelect = async (option: any) => {
 <template>
     <a-row id="globalHeader" style="margin-bottom: 16px;" align="center" :warp="false">
         <a-col flex="auto">
-            <a-menu mode="horizontal" :selected-keys:="selectKeys" @menu-item-click="doMenuClick">
+            <a-menu mode="horizontal" :default-selected-keys="['/home']" :selected-keys:="selectKeys" @menu-item-click="doMenuClick">
                 <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
                     <div class="title-bar">
                         <img class="logo" src="../assets/logo.svg" />
@@ -115,7 +119,6 @@ const handleSelect = async (option: any) => {
         </a-col>
     </a-row>
 </template>
-
 
 <style scoped>
 .title-bar {

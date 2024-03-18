@@ -7,8 +7,11 @@
  * @FilePath: \oj\NewCoder\src\App.vue
 -->
 <script setup lang="ts">
-import BasicLayout from "../src/layout/BasicLayout.vue";
+import { useRouter } from "vue-router";
 import { onMounted } from "vue";
+
+
+const router = useRouter()
 
 // 全局初始化函数
 const doInit = () => {
@@ -17,21 +20,15 @@ const doInit = () => {
 
 onMounted(() => {
   doInit();
-})
+  router.push({path: "/home"})
+});
 
 </script>
 
+
 <template>
   <div id="app">
-    <template v-if="$route.path.startsWith('/user')">
-      <RouterView></RouterView>
-    </template>
-    <template v-else-if="$route.path.startsWith('/profile')">
-      <RouterView></RouterView>
-    </template>
-    <template v-else>
-      <BasicLayout></BasicLayout>
-    </template>
+    <RouterView></RouterView>
   </div>
 </template>
 
