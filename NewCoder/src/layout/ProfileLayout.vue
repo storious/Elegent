@@ -12,7 +12,7 @@ import { RouterView } from 'vue-router';
                 <RouterView></RouterView>
             </a-layout-content>
             <a-layout-footer class="footer">
-                Powered by storious version: 1.0
+                Powered by storious & HM-GDTR <p>version: 1.0</p>
             </a-layout-footer>
         </a-layout>
     </div>
@@ -27,8 +27,9 @@ import { RouterView } from 'vue-router';
 }
 
 #profileLayout .footer {
-    background: #efefef;
+    background: #333;
     padding: 16px;
+    color: #eee;
     position: sticky;
     bottom: 0px;
     left: 0;

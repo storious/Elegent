@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
     "axios": "^1.6.7",
     "echarts": "^5.4.3",
     "vue": "^3.3.11",

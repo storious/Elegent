@@ -13,27 +13,28 @@ import GlobalHeader from '../components/GlobalHeader.vue';
                 <RouterView></RouterView>
             </a-layout-content>
             <a-layout-footer class="footer">
-                Powered by storious version: 1.0
+                Powered by storious & HM-GDTR <p>version: 1.0</p>
             </a-layout-footer>
         </a-layout>
     </div>
 </template>
 
 <style scoped>
-
 #basicLayout .header {
-    box-shadow: #eee 1px 1px 5px;
+    box-shadow: #ddd 1px 1px 5px;
+    background-color: #fff;
 }
 
 #basicLayout .content {
-    background: liner-gradient(to, right, #bbbb, #fff);
+    background: liner-gradient(to, right, #aaa, #fff);
     margin-bottom: 16px;
     padding: 20px;
 }
 
 #basicLayout .footer {
-    background: #efefef;
+    background: #333;
     padding: 16px;
+    color: #eee;
     position: sticky;
     bottom: 0px;
     left: 0;

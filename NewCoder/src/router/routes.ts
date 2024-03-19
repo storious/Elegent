@@ -13,23 +13,18 @@ export const routes: Array<RouteRecordRaw> = [
         name: "首页",
         component: () => import("../components/HelloWorld.vue"),
         meta: {
-          hideInMenu: true,
-        },
-      },
-      {
-        path: "/noAuth",
-        name: "无权限",
-        component: () => import("../views/NoAuthView.vue"),
-        meta: {
           hideInMenu: false,
+          icon: 'home'
         },
       },
+
       {
         path: "/ProblemSet",
         name: "题库",
         component: Problems,
         meta: {
-          hideInMenu: true,
+          hideInMenu: false,
+          icon: 'list',
           access: ACCESS_ENUM.NOT_LOGIN,
         },
       },
@@ -39,11 +34,33 @@ export const routes: Array<RouteRecordRaw> = [
         name: "关于我的",
         component: () => import("../views/AboutView.vue"),
         meta: {
+          hideInMenu: false,
+          icon: 'more'
+        },
+      },
+
+      {
+        path: "/noAuth",
+        name: "无权限",
+        component: () => import("../views/NoAuthView.vue"),
+        meta: {
           hideInMenu: true,
+        },
+      },
+
+      {
+        path: "/admin",
+        name: "管理员菜单",
+        component: () => import("../views/AdminView.vue"),
+        meta: {
+          hideInMenu: false,
+          access: ACCESS_ENUM.ADMIN,
+          icon: 'system'
         },
       },
     ],
   },
+  
 
   {
     path: "/profile",
@@ -86,15 +103,6 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       hideInMenu: true,
       access: ACCESS_ENUM.NOT_LOGIN,
-    },
-  },
-
-  {
-    path: "/admin",
-    name: "管理员菜单",
-    component: () => import("../views/AdminView.vue"),
-    meta: {
-      access: ACCESS_ENUM.ADMIN,
     },
   },
 ];

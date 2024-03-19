@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { routes } from "../router/routes";
 import { useRouter } from "vue-router";
-import {  ref, computed } from "vue"
+import { ref, computed } from "vue"
 import { useStore } from "vuex"
 import checkAccess from "../access/checkAccess"
 import {
@@ -10,8 +10,7 @@ import {
     IconExport
 } from '@arco-design/web-vue/es/icon';
 import ACCESS_ENUM from "../access/accessEnum";
-
-
+import { IconPark } from '@icon-park/vue-next/es/all';
 
 const router = useRouter();
 const store = useStore();
@@ -24,7 +23,7 @@ const visibleRoutes = computed(() => {
             const filteredChildren = item.children.filter((childItem) => {
                 // 这里可以根据需要添加更多条件
                 const loginUser = store.state.user.loginUser;
-                return !(!childItem.meta?.hideInMenu && checkAccess(loginUser, childItem?.meta?.access as string));
+                return childItem.meta?.hideInMenu == false && checkAccess(loginUser, childItem.meta?.access as string);
             });
             if (filteredChildren.length > 0) {
                 acc = filteredChildren;
@@ -50,7 +49,6 @@ const doMenuClick = (key: string) => {
 
 const toLoginOrProfile = () => {
     const loginUser = store.state.user.loginUser;
-    // console.log(loginUser);
 
     if (!loginUser.userRole || loginUser.userRole === ACCESS_ENUM.NOT_LOGIN) {
         router.push({
@@ -83,14 +81,14 @@ const handleSelect = async (option: any) => {
             })
         }
     }
-
 }
 
 </script>
 <template>
     <a-row id="globalHeader" style="margin-bottom: 16px;" align="center" :warp="false">
         <a-col flex="auto">
-            <a-menu mode="horizontal" :default-selected-keys="['/home']" :selected-keys:="selectKeys" @menu-item-click="doMenuClick">
+            <a-menu mode="horizontal" :default-selected-keys="['/home']" :selected-keys:="selectKeys"
+                @menu-item-click="doMenuClick">
                 <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
                     <div class="title-bar">
                         <img class="logo" src="../assets/logo.svg" />
@@ -99,13 +97,16 @@ const handleSelect = async (option: any) => {
                 </a-menu-item>
                 <a-menu-item v-for="item in visibleRoutes" :key="item.path">
                     {{ item.name }}
+                    <template #icon>
+                        <IconPark :type="item.meta?.icon" theme="outline" />
+                    </template>
                 </a-menu-item>
             </a-menu>
         </a-col>
-        <a-col flex="50px">
+        <a-col class="avatar" flex="50px">
             <a-dropdown @select="handleSelect">
                 <a-avatar>
-                    <IconUser />
+                    <icon-user />
                 </a-avatar>
                 <template #content>
                     <a-doption :value="{ value: 'login' }" popup-visible><icon-import /> 登录 / 注册</a-doption>
@@ -135,5 +136,8 @@ const handleSelect = async (option: any) => {
 
 .logo {
     height: 50px;
+}
+.avatar {
+    cursor: pointer;
 }
 </style>

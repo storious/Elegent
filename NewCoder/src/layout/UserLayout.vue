@@ -23,33 +23,27 @@ const openQrcode = () => {
                 <a-card class="card" style="width: 360px; margin: 0 auto;" hoverable>
                     <div v-show="!visible" v-cloak>
                         <!-- <template> -->
-                            <div class="qrcode-container" @click="openQrcode">
-                                <icon-qrcode size="50"  class="img"></icon-qrcode>
-                            </div>
-                            <div>
-                                <a-space>
-                                    <img class="logo" src="../assets/logo.svg" />
-                                </a-space>
-                                <RouterView></RouterView>
-                            </div>
-
-                        <!-- </template> -->
+                        <div class="qrcode-container" @click="openQrcode">
+                            <icon-qrcode size="50" class="img"></icon-qrcode>
+                        </div>
+                        <div>
+                            <a-space>
+                                <img class="logo" src="../assets/logo.svg" />
+                            </a-space>
+                            <RouterView></RouterView>
+                        </div>
                     </div>
                     <div v-show="visible" v-cloak>
-                        <!-- <template> -->
-                            <div class="qrcode-container" @click="openQrcode" >
-                                <icon-desktop size="50" class="img"></icon-desktop>
-                            </div>
-                            <a-typography-title :heading="3">扫码登录</a-typography-title>
-                            <img src="../assets/qrcode.png" class="show_full" />
-                            <div>打开App扫一扫</div>
-                        <!--    </template> -->
+
+                        <div class="qrcode-container" @click="openQrcode">
+                            <icon-desktop size="50" class="img"></icon-desktop>
                         </div>
+                        <a-typography-title :heading="3">扫码登录</a-typography-title>
+                        <img src="../assets/qrcode.png" class="show_full" />
+                        <div>打开App扫一扫</div>
+                    </div>
                 </a-card>
             </a-layout-content>
-            <a-layout-footer class="footer">
-                Powered by storious version: 1.0
-            </a-layout-footer>
         </a-layout>
     </div>
 </template>
@@ -72,13 +66,17 @@ const openQrcode = () => {
     border: 1px solid #ccc;
     padding: 5px;
     box-shadow: #efefef;
-    user-select: none; /* 禁用用户选择 */
-  -webkit-user-select: none; /* 兼容Webkit浏览器，如Chrome和Safari */
-  -moz-user-select: none; /* 兼容Firefox浏览器 */
-  -ms-user-select: none; /* 兼容IE浏览器 */
-  
-  /* 防止在移动设备上双击缩放 */
-  touch-action: manipulation;
+    user-select: none;
+    /* 禁用用户选择 */
+    -webkit-user-select: none;
+    /* 兼容Webkit浏览器，如Chrome和Safari */
+    -moz-user-select: none;
+    /* 兼容Firefox浏览器 */
+    -ms-user-select: none;
+    /* 兼容IE浏览器 */
+
+    /* 防止在移动设备上双击缩放 */
+    touch-action: manipulation;
 }
 
 .card:hover {
@@ -99,16 +97,6 @@ const openQrcode = () => {
     background: liner-gradient(to, right, #bbbb, #fff);
     margin-bottom: 16px;
     padding: 20px;
-}
-
-#userLayout .footer {
-    background: #efefef;
-    padding: 16px;
-    position: sticky;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    text-align: center;
 }
 
 .card {

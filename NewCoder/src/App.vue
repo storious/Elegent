@@ -2,9 +2,9 @@
  * @Author: storious <2227563488@qq.com>
  * @Date: 2024-01-27 09:47:56
  * @LastEditors: storious
- * @LastEditTime: 2024-03-10 14:16:29
+ * @LastEditTime: 2024-03-18 22:04:46
  * @Description: 
- * @FilePath: \oj\NewCoder\src\App.vue
+ * @FilePath: \newcoder\src\App.vue
 -->
 <script setup lang="ts">
 import { useRouter } from "vue-router";
@@ -20,11 +20,10 @@ const doInit = () => {
 
 onMounted(() => {
   doInit();
-  router.push({path: "/home"})
+  router.push({ path: "/home" })
 });
 
 </script>
-
 
 <template>
   <div id="app">
@@ -38,4 +37,4 @@ onMounted(() => {
   font-family: Inter, -apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans GB, noto sans, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 </style>
-  <!-- openapi --input http://localhost:8101//v2/api-docs --output ./generated --client axios -->
+<!-- openapi --input http://localhost:8101//v2/api-docs --output ./generated --client axios -->
