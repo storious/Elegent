@@ -11,6 +11,7 @@ import {
 } from '@arco-design/web-vue/es/icon';
 import ACCESS_ENUM from "../access/accessEnum";
 import { IconPark } from '@icon-park/vue-next/es/all';
+import { Message } from '@arco-design/web-vue';
 
 const router = useRouter();
 const store = useStore();
@@ -73,6 +74,9 @@ const handleSelect = async (option: any) => {
                     path: "/user/login"
                 }
             )
+        }
+        else {
+            Message.error("您已登录！") 
         }
     } else if (option.value === "logout") {
         if (store.state.user.loginUser.userRole !== ACCESS_ENUM.NOT_LOGIN) {
@@ -139,6 +143,7 @@ const handleSelect = async (option: any) => {
 .logo {
     height: 50px;
 }
+
 .avatar {
     cursor: pointer;
 }

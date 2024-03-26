@@ -9,7 +9,7 @@ function getVirtualData(year: string) {
     for (let time = date; time < end; time += dayTime) {
         data.push([
             echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
-            Math.floor(Math.random() * 100)
+            Math.floor(Math.random() * 10)
         ]);
     }
     return data;

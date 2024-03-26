@@ -11,6 +11,16 @@ import {
     IconBarChart
 } from '@arco-design/web-vue/es/icon';
 import router from '../../router';
+import ECharts from "../../components/ReEcharts/index.vue";
+import getData from '../../utils/heatMap';
+import { reactive } from 'vue'
+import { useStore } from "vuex"
+
+const year = '2024'
+const option: any = reactive(getData(year));
+const _height = "400px"
+const _width = "1000px"
+const store = useStore();
 
 const barPercent = [
     { label: 'Progress 1', percent: 0.25, level: "简单", ac: 21, all: 133 },
@@ -26,7 +36,7 @@ for (let item in barPercent) {
 
 const circlePercent: any = (sum_ac / sum_all).toFixed(4);
 
-const toHome = ()=>{
+const toHome = () => {
     router.push({
         path: "/home"
     })
@@ -43,7 +53,7 @@ const toHome = ()=>{
                     <IconEdit />
                 </template>
             </a-avatar>
-            <a-typography-text>Username</a-typography-text>
+            <a-typography-text type="primary">{{ store.state.user?.loginUser?.userName }}</a-typography-text>
             <div style="margin-bottom: 20px;">
                 <a-breadcrumb separator="|">
                     <a-breadcrumb-item>关注了 0</a-breadcrumb-item>
@@ -79,20 +89,20 @@ const toHome = ()=>{
         <a-grid :cols="4" :colGap="12" :rowGap="16">
 
             <a-grid-item :span="2" class="demo-item">
-                <a-typography-title :heading="6">解题数量</a-typography-title>
+                <a-typography-title :heading="6" >解题数量</a-typography-title>
                 <div class="progress-layout">
                     <div class="circle-progress">
                         <a-progress type="circle" size="large" :percent="circlePercent" :color="{
-                            '0%': 'rgb(var(--primary-6))',
-                            '75%': 'rgb(var(--success-6))',
-                        }" />
+                '0%': 'rgb(var(--primary-6))',
+                '75%': 'rgb(var(--success-6))',
+            }" />
                     </div>
                     <div class="bar-progress">
-                        <a-progress v-for="item in barPercent" size="large" :key="item.label" :percent="item.ac / item.all"
-                            :color="{
-                                '0%': 'rgb(var(--primary-6))',
-                                '75%': 'rgb(var(--success-6))',
-                            }">
+                        <a-progress v-for="item in barPercent" size="large" :key="item.label"
+                            :percent="item.ac / item.all" :color="{
+                '0%': 'rgb(var(--primary-6))',
+                '75%': 'rgb(var(--success-6))',
+            }">
                             <template v-slot:text="">
                                 {{ item.level }} : {{ item.ac }} / {{ item.all }}
                             </template>
@@ -102,7 +112,8 @@ const toHome = ()=>{
             </a-grid-item>
             <a-grid-item :span="2" class="demo-item">
                 <a-space style="margin-top: 5px;">
-                    <icon-trophy size="32" />个人荣誉
+                    <icon-trophy size="32" />
+                    <h2>个人荣誉</h2>
                 </a-space>
                 <div style="display: flex; margin-left: 10px;">
                     <a-space>
@@ -122,11 +133,13 @@ const toHome = ()=>{
                 </div>
 
             </a-grid-item>
-            <a-grid-item class="" style="height: auto;" :offset="0" :span="4">
-                <a-calendar></a-calendar>
+            <a-grid-item class="heatmap" :offset="0" :span="4">
+               
+                <ECharts :option="option" :height="_height" :width="_width" />
+            
             </a-grid-item>
 
-            <a-grid-item class="demo-item" :offset="0" :span="4">item | span - 3</a-grid-item>
+            <a-grid-item class="demo-item" :offset="0" :span="4"></a-grid-item>
         </a-grid>
     </div>
 </template>
@@ -169,6 +182,17 @@ const toHome = ()=>{
 
 #profileView .demo-item {
     height: 200px;
+    overflow: hidden;
+    /* justify-content: center; */
+    line-height: 50px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    /* color: var(--color-white); */
+    text-align: center;
+}
+
+#profileView .heatmap {
+    height: 325px;
     overflow: hidden;
     /* justify-content: center; */
     line-height: 50px;

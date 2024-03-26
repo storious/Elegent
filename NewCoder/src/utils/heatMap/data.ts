@@ -5,25 +5,25 @@ const option = {
         left: 'center',
         text: '个人活跃度'
     },
-    tooltip: {},
+    tooltip: { solve: {} },
     visualMap: {
         type: 'piecewise',
         align: "auto",
         itemWidth: 15,
         pieces: [
-            { gte: 10, lt: 30, label: "less ", color: '#00e600' },
-            { gte: 30, lt: 60, label: " ", color: '#00bf00' },
-            { gte: 60, label: "more", color: '#009a00' }
+            { gte: 1, lt: 3, label: " ", color: '#00e600' },
+            { gte: 3, lt: 6, label: " ", color: '#00bf00' },
+            { gte: 6, label: " ", color: '#009a00' }
         ],
 
         orient: 'horizontal',
         left: 'center',
-        top: 65,
+        top: 70,
     },
     calendar: {
         top: 120,
-        left: 30,
-        right: 30,
+        left: 70,
+        right: 40,
         cellSize: [15, 15],
         range: '',
         dayLabel: {

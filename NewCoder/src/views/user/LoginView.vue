@@ -15,7 +15,6 @@ const store = useStore();
 
 const handleLogin = async () => {
     const res = await UserControllerService.userLoginUsingPost(form);
-    // console.log(form)
 
     if (res.code === 0) {
         router.push({
@@ -23,7 +22,7 @@ const handleLogin = async () => {
             replace: true,
         });
         store.dispatch("user/getLoginUser");
-        // alert("登录成功," + JSON.stringify(res.data))
+
     }
     else {
         message.error("登录失败," + res.message);
