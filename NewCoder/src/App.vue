@@ -7,11 +7,7 @@
  * @FilePath: \newcoder\src\App.vue
 -->
 <script setup lang="ts">
-import { useRouter } from "vue-router";
 import { onMounted } from "vue";
-
-
-const router = useRouter()
 
 // 全局初始化函数
 const doInit = () => {
@@ -20,7 +16,7 @@ const doInit = () => {
 
 onMounted(() => {
   doInit();
-  router.push({ path: "/home" })
+
 });
 
 </script>

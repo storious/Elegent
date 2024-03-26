@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import foot  from '../utils/foot.ts';
 </script>
 
 <template>
@@ -12,7 +13,8 @@ import { RouterView } from 'vue-router';
                 <RouterView></RouterView>
             </a-layout-content>
             <a-layout-footer class="footer">
-                Powered by storious & HM-GDTR <p>version: 1.0</p>
+                {{ foot.author }}
+                <p>{{ foot.version }}</p>
             </a-layout-footer>
         </a-layout>
     </div>

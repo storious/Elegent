@@ -40,18 +40,9 @@ export const routes: Array<RouteRecordRaw> = [
       },
 
       {
-        path: "/noAuth",
-        name: "无权限",
-        component: () => import("../views/NoAuthView.vue"),
-        meta: {
-          hideInMenu: true,
-        },
-      },
-
-      {
-        path: "/admin",
+        path: "/toAdmin",
         name: "管理员菜单",
-        component: () => import("../views/AdminView.vue"),
+        redirect: "/admin",
         meta: {
           hideInMenu: false,
           access: ACCESS_ENUM.ADMIN,
@@ -60,7 +51,25 @@ export const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  
+
+  {
+    path: "/admin",
+    name: "管理员页面",
+    component: () => import("../views/AdminView.vue"),
+    meta: {
+      hideInMenu: false,
+      access: ACCESS_ENUM.USER,
+    },
+  },
+
+  {
+    path: "/noAuth",
+    name: "无权限",
+    component: () => import("../views/NoAuthView.vue"),
+    meta: {
+      hideInMenu: true,
+    },
+  },
 
   {
     path: "/profile",

@@ -15,6 +15,7 @@ import { IconPark } from '@icon-park/vue-next/es/all';
 const router = useRouter();
 const store = useStore();
 
+
 //需要展示的路由菜单
 
 const visibleRoutes = computed(() => {
@@ -35,6 +36,7 @@ const visibleRoutes = computed(() => {
 
 // 默认主页
 const selectKeys = ref(["/home"]);
+router.push({ path: "/home" })
 //监听路由
 //跳转时, 更新选中的菜单
 router.afterEach((to) => {
