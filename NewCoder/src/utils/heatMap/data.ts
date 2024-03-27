@@ -24,7 +24,7 @@ const option = {
         top: 120,
         left: 70,
         right: 40,
-        cellSize: [15, 15],
+        cellSize: [22, 20],
         range: '',
         dayLabel: {
             nameMap: ['Sun', '', '', '', '', '', ''],

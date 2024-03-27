@@ -45,7 +45,7 @@ const toHome = () => {
 </script>
 
 <template>
-    <div id="profileView" style="display: flex;">
+    <div id="profile-view" style="display: flex;">
         <a-card style="max-width: 360px;" class="personal-info">
             <a-avatar :size="64" style="margin-bottom: 20px; margin-right: 10px;">
                 <IconUser />
@@ -104,7 +104,7 @@ const toHome = () => {
                 '75%': 'rgb(var(--success-6))',
             }">
                             <template v-slot:text="">
-                                {{ item.level }} : {{ item.ac }} / {{ item.all }}
+                                {{ item.level }} 
                             </template>
                         </a-progress>
                     </div>
@@ -166,11 +166,13 @@ const toHome = () => {
 }
 
 .circle-progress {
+    margin-left: 50px;
     margin-right: 50px;
 }
 
 .bar-progress {
-    margin-right: 20px;
+    margin-left: 30px;
+    margin-right: 10px;
 }
 
 .personal-info {
@@ -180,7 +182,7 @@ const toHome = () => {
     justify-content: center;
 }
 
-#profileView .demo-item {
+#profile-view .demo-item {
     height: 200px;
     overflow: hidden;
     /* justify-content: center; */
@@ -191,7 +193,7 @@ const toHome = () => {
     text-align: center;
 }
 
-#profileView .heatmap {
+#profile-view .heatmap {
     height: 325px;
     overflow: hidden;
     /* justify-content: center; */

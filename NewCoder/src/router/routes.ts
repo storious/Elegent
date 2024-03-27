@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from "vue-router";
-import Problems from "../views/ProblemSetView.vue";
 import ACCESS_ENUM from "../access/accessEnum";
 
 export const routes: Array<RouteRecordRaw> = [
@@ -19,9 +18,9 @@ export const routes: Array<RouteRecordRaw> = [
       },
 
       {
-        path: "/ProblemSet",
+        path: "/problemSet",
         name: "题库",
-        component: Problems,
+        component: () => import("../views/ProblemSetView.vue"),
         meta: {
           hideInMenu: false,
           icon: 'list',
@@ -55,11 +54,24 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/admin",
     name: "管理员页面",
-    component: () => import("../views/AdminView.vue"),
+    component: () => import("../views/admin/AdminView.vue"),
     meta: {
       hideInMenu: false,
-      access: ACCESS_ENUM.USER,
+      access: ACCESS_ENUM.ADMIN,
     },
+  },
+
+  {
+    path: "/problems",
+    name: "做题页面",
+    component:() => import("../layout/DescriptionLayout.vue"),
+    children: [
+      {
+        path: "/problems/description",
+        name: "做题页面",
+        component:() => import("../views/problem/DescriptionView.vue"),
+      },
+    ]
   },
 
   {

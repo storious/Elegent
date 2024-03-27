@@ -22,7 +22,7 @@ const openQrcode = () => {
             <a-layout-content class="content">
                 <a-card class="card" style="width: 360px; margin: 0 auto;" hoverable>
                     <div v-show="!visible" v-cloak>
-                        <!-- <template> -->
+                    
                         <div class="qrcode-container" @click="openQrcode">
                             <icon-qrcode size="50" class="img"></icon-qrcode>
                         </div>

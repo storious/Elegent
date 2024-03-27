@@ -7,7 +7,6 @@ import foot  from '../utils/foot.ts';
     <div id="profileLayout">
         <a-layout style="min-height: 100vh;">
             <a-layout-header class="header">
-                    
             </a-layout-header>
             <a-layout-content class="content">
                 <RouterView></RouterView>
