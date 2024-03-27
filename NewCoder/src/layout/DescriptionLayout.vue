@@ -1,15 +1,28 @@
 <script setup lang="ts">
 import {
     IconHome,
-    IconMenuUnfold
+    IconMenuUnfold,
+    IconLeft,
+    IconRight
 } from '@arco-design/web-vue/es/icon';
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const visible = ref(false)
 
 const doMenuClick = (key: string) => {
-    if (key === "2") {
-        visible.value = !visible.value
+    switch (key) {
+        case "1":
+            router.push({
+                path: '/home'
+            })
+            break;
+        case "2":
+            visible.value = !visible.value
+            break;
+        default:
+            break;
     }
 };
 
@@ -28,22 +41,28 @@ const handleCancel = () => {
         <a-layout style="min-height: 100vh;">
             <a-layout-header class="header">
                 <div class="menu-demo">
-                    <a-menu mode="horizontal" theme="dark" :default-selected-keys="['1']"
+                    <a-menu mode="horizontal" theme="dark" :default-selected-keys="['0']"
                         @menu-item-click="doMenuClick">
-                        <a-menu-item key="1">
-                            首页
+                        <a-menu-item key="1">首页
                             <template #icon>
                                 <IconHome></IconHome>
                             </template>
                         </a-menu-item>
-                        <a-menu-item key="2">
-                            题库
+                        <a-menu-item key="2">题库
                             <template #icon>
                                 <icon-menu-unfold />
                             </template>
                         </a-menu-item>
-                        <a-menu-item key="3">Cloud Service</a-menu-item>
-                        <a-menu-item key="4">Cooperation</a-menu-item>
+                        <a-menu-item key="3">上一题
+                            <template #icon>
+                                <IconLeft />
+                            </template>
+                        </a-menu-item>
+                        <a-menu-item key="4">下一题
+                            <template #icon>
+                                <IconRight />
+                            </template>
+                        </a-menu-item>
                     </a-menu>
                 </div>
             </a-layout-header>
@@ -53,6 +72,7 @@ const handleCancel = () => {
                 </a-drawer>
                 <RouterView></RouterView>
             </a-layout-content>
+            <a-footer></a-footer>
         </a-layout>
     </div>
 </template>
